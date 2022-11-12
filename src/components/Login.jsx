@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import { useContext } from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { BlogContext } from "../contexts/BlogContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const style = {
     position: "absolute",
@@ -18,6 +19,8 @@ const style = {
 };
 
 export default function Login() {
+    const { loginEmail, loginPassword, setLoginEmail, setLoginPassword, handleLogin } =
+        useContext(AuthContext);
     const { openLogin, setOpenLogin, handleSwitch } = useContext(BlogContext);
 
     return (
@@ -31,40 +34,48 @@ export default function Login() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
-                    <Typography
-                        style={{ textAlign: "center" }}
-                        id="modal-modal-title"
-                        variant="h4"
-                        component="h2"
-                    >
-                        Login
-                    </Typography>
-                    <TextField
-                        style={{ marginTop: "2rem" }}
-                        id="outlined-basic"
-                        label="Email"
-                        variant="outlined"
-                    />
-                    <TextField
-                        style={{ marginTop: "2rem" }}
-                        id="outlined-basic"
-                        label="Password"
-                        variant="outlined"
-                    />
-                    <Typography style={{ marginTop: "2rem", textAlign: "center" }}>
-                        Don't have an account?{" "}
-                        <span
-                            style={{ cursor: "pointer", color: "dodgerblue" }}
-                            onClick={handleSwitch}
+                <form onSubmit={handleLogin}>
+                    <Box sx={style}>
+                        <Typography
+                            style={{ textAlign: "center" }}
+                            id="modal-modal-title"
+                            variant="h4"
+                            component="h2"
                         >
-                            Register Here!
-                        </span>
-                    </Typography>
-                    <Button style={{ marginTop: "2rem" }} variant="contained">
-                        Submit
-                    </Button>
-                </Box>
+                            Login
+                        </Typography>
+                        <TextField
+                            style={{ marginTop: "2rem" }}
+                            id="outlined-basic"
+                            label="Email"
+                            variant="outlined"
+                            type="email"
+                            onChange={e => setLoginEmail(e.target.value)}
+                            value={loginEmail}
+                        />
+                        <TextField
+                            style={{ marginTop: "2rem" }}
+                            id="outlined-basic"
+                            label="Password"
+                            variant="outlined"
+                            type="password"
+                            onChange={e => setLoginPassword(e.target.value)}
+                            value={loginPassword}
+                        />
+                        <Typography style={{ marginTop: "2rem", textAlign: "center" }}>
+                            Don't have an account?{" "}
+                            <span
+                                style={{ cursor: "pointer", color: "dodgerblue" }}
+                                onClick={handleSwitch}
+                            >
+                                Register Here!
+                            </span>
+                        </Typography>
+                        <Button type="submit" style={{ marginTop: "2rem" }} variant="contained">
+                            Submit
+                        </Button>
+                    </Box>
+                </form>
             </Modal>
         </div>
     );

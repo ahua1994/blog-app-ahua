@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import { useContext } from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { BlogContext } from "../contexts/BlogContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const style = {
     position: "absolute",
@@ -19,6 +20,15 @@ const style = {
 
 export default function Register() {
     const { openRegister, setOpenRegister, handleSwitch } = useContext(BlogContext);
+    const {
+        registerUsername,
+        registerEmail,
+        registerPassword,
+        setRegisterUsername,
+        setRegisterEmail,
+        setRegisterPassword,
+        handleRegister,
+    } = useContext(AuthContext);
 
     return (
         <div>
@@ -31,46 +41,56 @@ export default function Register() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
-                    <Typography
-                        style={{ textAlign: "center" }}
-                        id="modal-modal-title"
-                        variant="h4"
-                        component="h2"
-                    >
-                        Register
-                    </Typography>
-                    <TextField
-                        style={{ marginTop: "2rem" }}
-                        id="outlined-basic"
-                        label="Username"
-                        variant="outlined"
-                    />
-                    <TextField
-                        style={{ marginTop: "2rem" }}
-                        id="outlined-basic"
-                        label="Email"
-                        variant="outlined"
-                    />
-                    <TextField
-                        style={{ marginTop: "2rem" }}
-                        id="outlined-basic"
-                        label="Password"
-                        variant="outlined"
-                    />
-                    <Typography style={{ marginTop: "2rem", textAlign: "center" }}>
-                        Already have an account?{" "}
-                        <span
-                            style={{ cursor: "pointer", color: "dodgerblue" }}
-                            onClick={handleSwitch}
+                <form onSubmit={handleRegister}>
+                    <Box sx={style}>
+                        <Typography
+                            style={{ textAlign: "center" }}
+                            id="modal-modal-title"
+                            variant="h4"
+                            component="h2"
                         >
-                            Login Here!
-                        </span>
-                    </Typography>
-                    <Button style={{ marginTop: "2rem" }} variant="contained">
-                        Submit
-                    </Button>
-                </Box>
+                            Register
+                        </Typography>
+                        <TextField
+                            style={{ marginTop: "2rem" }}
+                            id="outlined-basic"
+                            label="Username"
+                            variant="outlined"
+                            onChange={e => setRegisterUsername(e.target.value)}
+                            value={registerUsername}
+                        />
+                        <TextField
+                            style={{ marginTop: "2rem" }}
+                            id="outlined-basic"
+                            label="Email"
+                            variant="outlined"
+                            onChange={e => setRegisterEmail(e.target.value)}
+                            value={registerEmail}
+                            type="email"
+                        />
+                        <TextField
+                            style={{ marginTop: "2rem" }}
+                            id="outlined-basic"
+                            label="Password"
+                            variant="outlined"
+                            onChange={e => setRegisterPassword(e.target.value)}
+                            value={registerPassword}
+                            type="password"
+                        />
+                        <Typography style={{ marginTop: "2rem", textAlign: "center" }}>
+                            Already have an account?{" "}
+                            <span
+                                style={{ cursor: "pointer", color: "dodgerblue" }}
+                                onClick={handleSwitch}
+                            >
+                                Login Here!
+                            </span>
+                        </Typography>
+                        <Button type="submit" style={{ marginTop: "2rem" }} variant="contained">
+                            Submit
+                        </Button>
+                    </Box>
+                </form>
             </Modal>
         </div>
     );

@@ -7,21 +7,24 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import CustomNavbar from "./components/CustomNavbar";
 import BlogContextProvider from "./contexts/BlogContext";
+import AuthContextProvider from "./contexts/AuthContext";
 
 function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <BlogContextProvider>
-                    <CustomNavbar />
-                    <Routes>
-                        <Route path="/" element={<Dashboard />}></Route>
-                        <Route path="/about" element={<About />}></Route>
-                        <Route path="/details" element={<Details />}></Route>
-                        <Route path="/profile" element={<Profile />}></Route>
-                        <Route path="*" element={<Error />}></Route>
-                    </Routes>
-                </BlogContextProvider>
+                <AuthContextProvider>
+                    <BlogContextProvider>
+                        <CustomNavbar />
+                        <Routes>
+                            <Route path="/" element={<Dashboard />}></Route>
+                            <Route path="/about" element={<About />}></Route>
+                            <Route path="/details" element={<Details />}></Route>
+                            <Route path="/profile" element={<Profile />}></Route>
+                            <Route path="*" element={<Error />}></Route>
+                        </Routes>
+                    </BlogContextProvider>
+                </AuthContextProvider>
             </BrowserRouter>
         </div>
     );

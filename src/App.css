@@ -1,2 +1,10 @@
 .App { 
+    min-height: 100vh;
+    background-color: #222;
+    color: white;
 } 
+.MuiBox-root{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+}

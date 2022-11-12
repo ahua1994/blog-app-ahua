@@ -1,7 +1,21 @@
-import React from "react";
+import { createContext, useState } from "react";
 
-const BlogContext = () => {
-    return <div>BlogContext</div>;
+export const BlogContext = createContext();
+
+const BlogContextProvider = ({ children }) => {
+    const [openLogin, setOpenLogin] = useState(false);
+    const [openRegister, setOpenRegister] = useState(false);
+    const handleSwitch = () => {
+        setOpenLogin(!openLogin);
+        setOpenRegister(!openRegister);
+    };
+    return (
+        <BlogContext.Provider
+            value={{ openLogin, openRegister, setOpenLogin, setOpenRegister, handleSwitch }}
+        >
+            {children}
+        </BlogContext.Provider>
+    );
 };
 
-export default BlogContext;
+export default BlogContextProvider;

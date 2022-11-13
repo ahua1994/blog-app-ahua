@@ -37,7 +37,12 @@ export default function Register() {
             </div>
             <Modal
                 open={openRegister}
-                onClose={() => setOpenRegister(false)}
+                onClose={() => {
+                    setRegisterEmail("");
+                    setRegisterPassword("");
+                    setRegisterUsername("");
+                    setOpenRegister(false);
+                }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -53,35 +58,40 @@ export default function Register() {
                         </Typography>
                         <TextField
                             style={{ marginTop: "2rem" }}
-                            id="outlined-basic"
                             label="Username"
                             variant="outlined"
                             onChange={e => setRegisterUsername(e.target.value)}
                             value={registerUsername}
+                            required
                         />
                         <TextField
                             style={{ marginTop: "2rem" }}
-                            id="outlined-basic"
                             label="Email"
                             variant="outlined"
                             onChange={e => setRegisterEmail(e.target.value)}
                             value={registerEmail}
                             type="email"
+                            required
                         />
                         <TextField
                             style={{ marginTop: "2rem" }}
-                            id="outlined-basic"
                             label="Password"
                             variant="outlined"
                             onChange={e => setRegisterPassword(e.target.value)}
                             value={registerPassword}
                             type="password"
+                            required
                         />
                         <Typography style={{ marginTop: "2rem", textAlign: "center" }}>
                             Already have an account?{" "}
                             <span
                                 style={{ cursor: "pointer", color: "dodgerblue" }}
-                                onClick={handleSwitch}
+                                onClick={() => {
+                                    handleSwitch();
+                                    setRegisterUsername("");
+                                    setRegisterEmail("");
+                                    setRegisterPassword("");
+                                }}
                             >
                                 Login Here!
                             </span>

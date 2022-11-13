@@ -16,3 +16,7 @@ code {
   font-family: Thorletto;
   src: url("./helpers/Thorletto.ttf");
 }
+
+.toast-container {
+  filter: none !important;
+}

@@ -11,6 +11,9 @@ const CustomNavbar = () => {
                 Andy Hua Blog
             </div>
             <div className="links">
+                <div className="nav-btn" onClick={() => navigate("/")}>
+                    Home
+                </div>
                 <div className="nav-btn">New Blog</div>
                 <Login />
                 <Register />

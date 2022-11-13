@@ -8,13 +8,16 @@ import Profile from "./pages/Profile";
 import CustomNavbar from "./components/CustomNavbar";
 import BlogContextProvider from "./contexts/BlogContext";
 import AuthContextProvider from "./contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <AuthContextProvider>
-                    <BlogContextProvider>
+                <BlogContextProvider>
+                    <AuthContextProvider>
+                        <ToastContainer />
                         <CustomNavbar />
                         <Routes>
                             <Route path="/" element={<Dashboard />}></Route>
@@ -23,8 +26,8 @@ function App() {
                             <Route path="/profile" element={<Profile />}></Route>
                             <Route path="*" element={<Error />}></Route>
                         </Routes>
-                    </BlogContextProvider>
-                </AuthContextProvider>
+                    </AuthContextProvider>
+                </BlogContextProvider>
             </BrowserRouter>
         </div>
     );

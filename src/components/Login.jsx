@@ -30,7 +30,11 @@ export default function Login() {
             </div>
             <Modal
                 open={openLogin}
-                onClose={() => setOpenLogin(false)}
+                onClose={() => {
+                    setLoginEmail("");
+                    setLoginPassword("");
+                    setOpenLogin(false);
+                }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -46,31 +50,38 @@ export default function Login() {
                         </Typography>
                         <TextField
                             style={{ marginTop: "2rem" }}
-                            id="outlined-basic"
                             label="Email"
                             variant="outlined"
                             type="email"
                             onChange={e => setLoginEmail(e.target.value)}
                             value={loginEmail}
+                            required
                         />
                         <TextField
                             style={{ marginTop: "2rem" }}
-                            id="outlined-basic"
                             label="Password"
                             variant="outlined"
                             type="password"
                             onChange={e => setLoginPassword(e.target.value)}
                             value={loginPassword}
+                            required
                         />
                         <Typography style={{ marginTop: "2rem", textAlign: "center" }}>
                             Don't have an account?{" "}
                             <span
                                 style={{ cursor: "pointer", color: "dodgerblue" }}
-                                onClick={handleSwitch}
+                                onClick={() => {
+                                    handleSwitch();
+                                    setLoginEmail("");
+                                    setLoginPassword("");
+                                }}
                             >
                                 Register Here!
                             </span>
                         </Typography>
+                        <Button type="submit" style={{ marginTop: "2rem" }} variant="contained">
+                            Continue With Google
+                        </Button>
                         <Button type="submit" style={{ marginTop: "2rem" }} variant="contained">
                             Submit
                         </Button>

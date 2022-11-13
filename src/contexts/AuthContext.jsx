@@ -1,20 +1,28 @@
 import { db, auth } from "../helpers/firebase";
-import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+import { createContext, useState, useContext } from "react";
 import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     updateProfile,
 } from "firebase/auth";
+import { BlogContext } from "./BlogContext";
 
 export const AuthContext = createContext();
+
 const AuthContextProvider = ({ children }) => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
-    const navigate = useNavigate();
+    const { handleSwitch, setOpenLogin } = useContext(BlogContext);
+    const toastStyle = {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "dark",
+    };
 
     const handleRegister = async e => {
         e.preventDefault();
@@ -22,11 +30,13 @@ const AuthContextProvider = ({ children }) => {
             await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
             await updateProfile(auth.currentUser, registerUsername);
         } catch (err) {
-            return err.message.replace("Firebase:", "");
+            return toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }
         setRegisterEmail("");
         setRegisterPassword("");
         setRegisterUsername("");
+        toast.success("Registered Successfully!", toastStyle);
+        handleSwitch();
     };
 
     const handleLogin = async e => {
@@ -34,11 +44,12 @@ const AuthContextProvider = ({ children }) => {
         try {
             await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
         } catch (err) {
-            return err.message.replace("Firebase:", "");
+            return toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }
         setLoginEmail("");
         setLoginPassword("");
-        navigate("/");
+        toast.success("Login Successful!", toastStyle);
+        setOpenLogin(false);
     };
 
     return (

@@ -1,4 +1,4 @@
-import { db, auth } from "../helpers/firebase";
+import { auth } from "../helpers/firebase";
 import { toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import { createContext, useState, useContext } from "react";
@@ -6,6 +6,8 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     updateProfile,
+    GoogleAuthProvider,
+    signInWithPopup,
 } from "firebase/auth";
 import { BlogContext } from "./BlogContext";
 
@@ -39,6 +41,12 @@ const AuthContextProvider = ({ children }) => {
         handleSwitch();
     };
 
+    const signInProvider = async () => {
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+        toast.success("Login Successful!", toastStyle);
+    };
+
     const handleLogin = async e => {
         e.preventDefault();
         try {
@@ -67,6 +75,7 @@ const AuthContextProvider = ({ children }) => {
                 setRegisterPassword,
                 handleLogin,
                 handleRegister,
+                signInProvider,
             }}
         >
             {children}

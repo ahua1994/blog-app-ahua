@@ -96,7 +96,11 @@ export default function Register() {
                                 Login Here!
                             </span>
                         </Typography>
-                        <Button type="submit" style={{ marginTop: "2rem" }} variant="contained">
+                        <Button
+                            type="submit"
+                            style={{ marginTop: "2rem", fontSize: "1.05rem" }}
+                            variant="contained"
+                        >
                             Submit
                         </Button>
                     </Box>

@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { BlogContext } from "../contexts/BlogContext";
 import { AuthContext } from "../contexts/AuthContext";
+import google from "../images/google.png";
 
 const style = {
     position: "absolute",
@@ -19,8 +20,14 @@ const style = {
 };
 
 export default function Login() {
-    const { loginEmail, loginPassword, setLoginEmail, setLoginPassword, handleLogin } =
-        useContext(AuthContext);
+    const {
+        loginEmail,
+        loginPassword,
+        setLoginEmail,
+        setLoginPassword,
+        handleLogin,
+        signInProvider,
+    } = useContext(AuthContext);
     const { openLogin, setOpenLogin, handleSwitch } = useContext(BlogContext);
 
     return (
@@ -79,10 +86,23 @@ export default function Login() {
                                 Register Here!
                             </span>
                         </Typography>
-                        <Button type="submit" style={{ marginTop: "2rem" }} variant="contained">
-                            Continue With Google
+                        <Button
+                            size="large"
+                            style={{ marginTop: "2rem", backgroundColor: "#333" }}
+                            variant="contained"
+                            onClick={() => {
+                                signInProvider();
+                                setOpenLogin(false);
+                            }}
+                        >
+                            <img style={{ width: "25px" }} src={google} alt="google"></img>
+                            &nbsp;&nbsp;&nbsp;&nbsp; Continue With Google
                         </Button>
-                        <Button type="submit" style={{ marginTop: "2rem" }} variant="contained">
+                        <Button
+                            type="submit"
+                            style={{ marginTop: "2rem", fontSize: "1.05rem" }}
+                            variant="contained"
+                        >
                             Submit
                         </Button>
                     </Box>

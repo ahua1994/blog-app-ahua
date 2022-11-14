@@ -1,13 +1,14 @@
 import { auth } from "../helpers/firebase";
 import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 import { createContext, useState, useContext } from "react";
 import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
+    onAuthStateChanged,
     updateProfile,
     GoogleAuthProvider,
     signInWithPopup,
+    signOut,
 } from "firebase/auth";
 import { BlogContext } from "./BlogContext";
 
@@ -15,6 +16,7 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
     const [loginEmail, setLoginEmail] = useState("");
+    const [currentUser, setCurrentUser] = useState();
     const [loginPassword, setLoginPassword] = useState("");
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
@@ -60,6 +62,17 @@ const AuthContextProvider = ({ children }) => {
         setOpenLogin(false);
     };
 
+    const userObserver = setCurrentUser => {
+        onAuthStateChanged(auth, user => {
+            if (user) setCurrentUser(user);
+            else setCurrentUser(null);
+        });
+    };
+
+    const logout = () => {
+        signOut(auth);
+    };
+
     return (
         <AuthContext.Provider
             value={{
@@ -68,6 +81,7 @@ const AuthContextProvider = ({ children }) => {
                 registerUsername,
                 registerEmail,
                 registerPassword,
+                currentUser,
                 setLoginEmail,
                 setLoginPassword,
                 setRegisterUsername,
@@ -76,6 +90,9 @@ const AuthContextProvider = ({ children }) => {
                 handleLogin,
                 handleRegister,
                 signInProvider,
+                logout,
+                setCurrentUser,
+                userObserver,
             }}
         >
             {children}

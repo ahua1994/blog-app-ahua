@@ -6,19 +6,6 @@ import { BlogContext } from "../contexts/BlogContext";
 import { AuthContext } from "../contexts/AuthContext";
 import google from "../images/google.png";
 
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    borderRadius: "15px",
-};
-
 export default function Login() {
     const {
         loginEmail,
@@ -28,10 +15,10 @@ export default function Login() {
         handleLogin,
         signInProvider,
     } = useContext(AuthContext);
-    const { openLogin, setOpenLogin, handleSwitch } = useContext(BlogContext);
+    const { style, openLogin, setOpenLogin, handleSwitch } = useContext(BlogContext);
 
     return (
-        <div>
+        <>
             <div onClick={() => setOpenLogin(true)} className={"nav-btn"}>
                 Login
             </div>
@@ -95,7 +82,7 @@ export default function Login() {
                                 setOpenLogin(false);
                             }}
                         >
-                            <img style={{ width: "25px" }} src={google} alt="google"></img>
+                            <img style={{ width: "25px" }} src={google} alt="g-icon"></img>
                             &nbsp;&nbsp;&nbsp;&nbsp; Continue With Google
                         </Button>
                         <Button
@@ -108,6 +95,6 @@ export default function Login() {
                     </Box>
                 </form>
             </Modal>
-        </div>
+        </>
     );
 }

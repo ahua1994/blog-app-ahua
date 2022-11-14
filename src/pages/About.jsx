@@ -3,10 +3,10 @@ import "./About.scss";
 const About = () => {
     return (
         <div className="About">
-            <h1>Hello My Name Is Andy Hua</h1>
+            <h1>Hello My Name Is Andy Hua!</h1>
             <p className="intro">
                 I am currently a student at Clarusway, and I am studying React.<br></br> This is a
-                recipe app created using what we've learned so far!
+                blog app created using what we've learned so far!
             </p>
             <div className="info">
                 <div>

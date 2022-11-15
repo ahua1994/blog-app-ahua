@@ -1,0 +1,11 @@
+.MuiPaper-root, .MuiTypography-root {
+    background-color: rgb(11, 11, 11) !important;
+    color: rgb(230, 230, 230) !important; 
+    font-size: 1.1rem !important;
+} 
+svg {
+    color:rgb(230, 230, 230); 
+    &:hover{
+        color: red;
+    }
+}

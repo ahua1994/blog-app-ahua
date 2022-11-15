@@ -14,6 +14,7 @@ export default function Login() {
         setLoginPassword,
         handleLogin,
         signInProvider,
+        forgetPassword,
     } = useContext(AuthContext);
     const { style, openLogin, setOpenLogin, handleSwitch } = useContext(BlogContext);
 
@@ -61,6 +62,15 @@ export default function Login() {
                             required
                         />
                         <Typography style={{ marginTop: "2rem", textAlign: "center" }}>
+                            Forgot Your Password? Enter Email &{" "}
+                            <span
+                                style={{ cursor: "pointer", color: "dodgerblue" }}
+                                onClick={() => forgetPassword(loginEmail)}
+                            >
+                                Click Here
+                            </span>
+                        </Typography>
+                        <Typography style={{ marginTop: "0.5rem", textAlign: "center" }}>
                             Don't have an account?{" "}
                             <span
                                 style={{ cursor: "pointer", color: "dodgerblue" }}
@@ -73,6 +83,7 @@ export default function Login() {
                                 Register Here!
                             </span>
                         </Typography>
+
                         <Button
                             size="large"
                             style={{ marginTop: "2rem", backgroundColor: "#333" }}

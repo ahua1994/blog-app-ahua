@@ -1,0 +1,11 @@
+.Dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    .blogs{ 
+        width: 70%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 3rem;
+    }
+}

@@ -1,4 +1,7 @@
+import { db } from "../helpers/firebase";
+import { toast } from "react-toastify";
 import { createContext, useState } from "react";
+import { addDoc, collection, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 export const BlogContext = createContext();
 
@@ -7,7 +10,14 @@ const BlogContextProvider = ({ children }) => {
     const [openRegister, setOpenRegister] = useState(false);
     const [openAddBlog, setOpenAddBlog] = useState(false);
     const [openEditBlog, setOpenEditBlog] = useState(false);
+    const [blogs, setBlogs] = useState([]);
     const [post, setPost] = useState({});
+    const toastStyle = {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "dark",
+        hideProgressBar: true,
+    };
     const style = {
         position: "absolute",
         top: "50%",
@@ -19,6 +29,22 @@ const BlogContextProvider = ({ children }) => {
         boxShadow: 24,
         p: 4,
         borderRadius: "15px",
+    };
+    const addPost = async () => {
+        try {
+            await addDoc(collection(db, "posts"), post);
+            toast.success("Thank You For Posting!", toastStyle);
+        } catch (err) {
+            toast.error(err.message.replace("Firebase:", ""), toastStyle);
+        }
+    };
+    const getPosts = async () => {
+        try {
+            const querySnapshot = await getDocs(collection(db, "posts"));
+            setBlogs(querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        } catch (err) {
+            toast.error(err.message.replace("Firebase:", ""), toastStyle);
+        }
     };
     const handleSwitch = () => {
         setOpenLogin(!openLogin);
@@ -32,11 +58,14 @@ const BlogContextProvider = ({ children }) => {
                 openRegister,
                 openAddBlog,
                 style,
+                blogs,
                 setPost,
+                getPosts,
                 setOpenLogin,
                 setOpenRegister,
                 setOpenAddBlog,
                 handleSwitch,
+                addPost,
             }}
         >
             {children}

@@ -24,9 +24,9 @@ const CustomNavbar = () => {
                 <div className="nav-btn" onClick={() => navigate("/about")}>
                     About
                 </div>
-                <AddBlog />
                 {currentUser ? (
                     <>
+                        <AddBlog />
                         <div className="nav-btn">
                             {currentUser.displayName} <FontAwesomeIcon icon={faUserCircle} />
                         </div>

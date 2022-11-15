@@ -1,11 +1,12 @@
 import { useContext } from "react";
+import { db } from "../helpers/firebase";
 import { BlogContext } from "../contexts/BlogContext";
 import { Button, TextField, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
 const AddBlog = () => {
-    const { style, post, setPost, openAddBlog, setOpenAddBlog } = useContext(BlogContext);
+    const { addPost, style, post, setPost, openAddBlog, setOpenAddBlog } = useContext(BlogContext);
 
     //might be reusable in EditBlog
     const handleChange = e => {
@@ -15,6 +16,8 @@ const AddBlog = () => {
     };
     const handleSubmit = e => {
         e.preventDefault();
+        addPost();
+        setOpenAddBlog(false);
         setPost({});
     };
 
@@ -60,12 +63,12 @@ const AddBlog = () => {
                         />
                         <TextField
                             style={{ marginTop: "2rem" }}
-                            label="Content"
+                            label="Info"
                             variant="outlined"
                             required
-                            name="content"
+                            name="info"
                             onChange={e => handleChange(e)}
-                            value={post.content || ""}
+                            value={post.info || ""}
                         />
                         <Button
                             type="submit"

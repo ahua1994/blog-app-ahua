@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { createContext, useState, useContext } from "react";
 import {
     signInWithEmailAndPassword,
+    sendPasswordResetEmail,
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     updateProfile,
@@ -26,6 +27,7 @@ const AuthContextProvider = ({ children }) => {
         position: "top-center",
         autoClose: 3000,
         theme: "dark",
+        hideProgressBar: true,
     };
 
     const handleRegister = async e => {
@@ -43,10 +45,19 @@ const AuthContextProvider = ({ children }) => {
         handleSwitch();
     };
 
+    const forgetPassword = async email => {
+        try {
+            await sendPasswordResetEmail(auth, email);
+            return toast.success("Please Check Your Inbox", toastStyle);
+        } catch (err) {
+            return toast.error(err.message.replace("Firebase:", ""), toastStyle);
+        }
+    };
+
     const signInProvider = async () => {
         const provider = new GoogleAuthProvider();
         await signInWithPopup(auth, provider);
-        toast.success("Login Successful!", toastStyle);
+        toast.success("Login Successful !", toastStyle);
     };
 
     const handleLogin = async e => {
@@ -58,7 +69,7 @@ const AuthContextProvider = ({ children }) => {
         }
         setLoginEmail("");
         setLoginPassword("");
-        toast.success("Login Successful!", toastStyle);
+        toast.success("Login Successful !", toastStyle);
         setOpenLogin(false);
     };
 
@@ -70,6 +81,7 @@ const AuthContextProvider = ({ children }) => {
     };
 
     const logout = () => {
+        toast.info("You Have Been Signed Out", toastStyle);
         signOut(auth);
     };
 
@@ -93,6 +105,7 @@ const AuthContextProvider = ({ children }) => {
                 logout,
                 setCurrentUser,
                 userObserver,
+                forgetPassword,
             }}
         >
             {children}

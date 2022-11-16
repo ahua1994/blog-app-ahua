@@ -11,11 +11,13 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button } from "@mui/material";
 import { AuthContext } from "../contexts/AuthContext";
+import { BlogContext } from "../contexts/BlogContext";
 import EditBlog from "./EditBlog";
 import Details from "../pages/Details";
 
 const BlogCard = ({ blog }) => {
     const { currentUser } = useContext(AuthContext);
+    const { deletePost } = useContext(BlogContext);
     return (
         <Card>
             <CardHeader
@@ -39,19 +41,24 @@ const BlogCard = ({ blog }) => {
             </CardContent>
             <CardActions>
                 <div className="buttons">
+                    <Details />
                     {currentUser?.uid === blog.userId && (
                         <>
+                            <EditBlog user={currentUser} blog={blog} />
                             <Button
                                 color="error"
                                 style={{ marginLeft: "0.6rem" }}
                                 variant="contained"
+                                onClick={() => {
+                                    if (window.confirm("Are you sure you want to delete this?")) {
+                                        deletePost(blog.postId);
+                                    }
+                                }}
                             >
                                 Del
                             </Button>
-                            <EditBlog user={currentUser} blog={blog} />
                         </>
                     )}
-                    <Details />
                 </div>
                 <IconButton>
                     <FavoriteIcon />

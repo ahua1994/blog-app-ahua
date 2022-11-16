@@ -70,10 +70,11 @@ const AddBlog = ({ user }) => {
                             name="image"
                             onChange={e => handleChange(e)}
                             value={post.image || ""}
+                            placeholder="Optional Image Link"
                         />
                         <TextField
                             style={{ marginTop: "2rem" }}
-                            label="Info"
+                            label="Entry"
                             variant="outlined"
                             required
                             name="info"

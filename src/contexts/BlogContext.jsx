@@ -46,6 +46,23 @@ const BlogContextProvider = ({ children }) => {
             toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }
     };
+    const editPost = async editId => {
+        const docRef = doc(db, "/posts/" + editId);
+        try {
+            await setDoc(docRef, post);
+            toast.success("Your Post Has Been Edited!", toastStyle);
+        } catch (err) {
+            toast.error(err.message.replace("Firebase:", ""), toastStyle);
+        }
+    };
+    const deletePost = async id => {
+        try {
+            await deleteDoc(doc(db, "posts", id));
+            toast.info("Your Post Has Been Deleted", toastStyle);
+        } catch (err) {
+            toast.error(err.message.replace("Firebase:", ""), toastStyle);
+        }
+    };
     const handleSwitch = () => {
         setOpenLogin(!openLogin);
         setOpenRegister(!openRegister);
@@ -67,6 +84,8 @@ const BlogContextProvider = ({ children }) => {
                 blogs,
                 setPost,
                 getPosts,
+                editPost,
+                deletePost,
                 setOpenLogin,
                 setOpenRegister,
                 setOpenAddBlog,

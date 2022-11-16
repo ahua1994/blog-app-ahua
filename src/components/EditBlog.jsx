@@ -6,14 +6,15 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
 const EditBlog = ({ user, blog }) => {
-    const { style, post, setPost, openEditBlog, setOpenEditBlog, handleChange } =
+    const { style, post, setPost, openEditBlog, setOpenEditBlog, handleChange, editPost } =
         useContext(BlogContext);
     const handleEdit = e => {
         e.preventDefault();
+        editPost(blog.postId);
         setOpenEditBlog(false);
         setPost({});
     };
-    console.log(post);
+    console.log(blog);
     return (
         <>
             <Button

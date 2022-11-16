@@ -18,7 +18,7 @@ export default function Register() {
     } = useContext(AuthContext);
 
     return (
-        <div>
+        <>
             <div onClick={() => setOpenRegister(true)} className={"nav-btn"}>
                 Register
             </div>
@@ -93,6 +93,6 @@ export default function Register() {
                     </Box>
                 </form>
             </Modal>
-        </div>
+        </>
     );
 }

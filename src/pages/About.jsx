@@ -1,4 +1,7 @@
 import "./About.scss";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import EmailIcon from "@mui/icons-material/Email";
 
 const About = () => {
     return (
@@ -10,13 +13,17 @@ const About = () => {
             </p>
             <div className="info">
                 <div>
-                    <a href="https://github.com/ahua1994">ahua1994</a>
+                    <a href="https://github.com/ahua1994">
+                        <GitHubIcon /> ahua1994
+                    </a>
                 </div>
                 <div>
-                    <a href="https://www.linkedin.com/in/andy-hua-125431168/">Andy Hua</a>
+                    <a href="https://www.linkedin.com/in/andy-hua-125431168/">
+                        <LinkedInIcon /> Andy Hua
+                    </a>
                 </div>
                 <div className="email">
-                    <p>user.andy.hua@gmail.com</p>
+                    <EmailIcon /> user.andy.hua@gmail.com
                 </div>
             </div>
         </div>

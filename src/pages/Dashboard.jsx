@@ -8,14 +8,14 @@ const Dashboard = () => {
     useEffect(() => {
         getPosts();
     }, []);
-    console.log(blogs);
+    // console.log(blogs);
     return (
         <div className="Dashboard">
             <input type="text" placeholder="Search" />
             <button>Search</button>
             <div className="blogs">
                 {blogs?.map(blog => (
-                    <BlogCard key={blog.id} blog={blog} />
+                    <BlogCard key={blog.postId} blog={blog} />
                 ))}
             </div>
         </div>

@@ -1,5 +1,5 @@
 import "./BlogCard.scss";
-import * as React from "react";
+import { useState, useContext } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,14 +9,19 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Button } from "@mui/material";
+import { AuthContext } from "../contexts/AuthContext";
+import EditBlog from "./EditBlog";
+import Details from "../pages/Details";
 
 const BlogCard = ({ blog }) => {
+    const { currentUser } = useContext(AuthContext);
     return (
         <Card>
             <CardHeader
-                avatar={<Avatar sx={{ bgcolor: "#f44336" }}>R</Avatar>}
-                title={`${blog.title} by `}
-                // subheader="September 14, 2016"
+                avatar={<Avatar sx={{ bgcolor: "#f44336" }}>{blog.author[0] || "?"}</Avatar>}
+                title={blog.title}
+                subheader={`by ${blog.author}`}
             />
             <CardMedia
                 component="img"
@@ -25,11 +30,29 @@ const BlogCard = ({ blog }) => {
                 alt="img"
             />
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                    {blog.info}
+                <Typography style={{ textAlign: "right", fontSize: "0.8rem" }} variant="body2">
+                    {blog.date}
+                </Typography>
+                <Typography variant="body2">
+                    {blog.info.length > 85 ? `${blog.info.slice(0, 85)}...` : blog.info}
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing>
+            <CardActions>
+                <div className="buttons">
+                    {currentUser?.uid === blog.userId && (
+                        <>
+                            <Button
+                                color="error"
+                                style={{ marginLeft: "0.6rem" }}
+                                variant="contained"
+                            >
+                                Del
+                            </Button>
+                            <EditBlog user={currentUser} blog={blog} />
+                        </>
+                    )}
+                    <Details />
+                </div>
                 <IconButton>
                     <FavoriteIcon />
                 </IconButton>

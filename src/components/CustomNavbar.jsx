@@ -26,7 +26,7 @@ const CustomNavbar = () => {
                 </div>
                 {currentUser ? (
                     <>
-                        <AddBlog />
+                        <AddBlog user={currentUser}/>
                         <div className="nav-btn">
                             {currentUser.displayName} <FontAwesomeIcon icon={faUserCircle} />
                         </div>

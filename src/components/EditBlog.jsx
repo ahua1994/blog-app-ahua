@@ -1,50 +1,48 @@
+import React from "react";
 import { useContext } from "react";
-import { db } from "../helpers/firebase";
 import { BlogContext } from "../contexts/BlogContext";
 import { Button, TextField, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
-const AddBlog = ({ user }) => {
-    const { addPost, style, post, setPost, openAddBlog, setOpenAddBlog, handleChange } =
+const EditBlog = ({ user, blog }) => {
+    const { style, post, setPost, openEditBlog, setOpenEditBlog, handleChange } =
         useContext(BlogContext);
-    // console.log(user);
-    //might be reusable in EditBlog
-
-    const handleSubmit = e => {
+    const handleEdit = e => {
         e.preventDefault();
-        addPost();
-        setOpenAddBlog(false);
+        setOpenEditBlog(false);
         setPost({});
     };
-
+    console.log(post);
     return (
         <>
-            <div
+            <Button
                 onClick={() => {
-                    let newPost = { ...post, author: user.displayName, userId: user.uid };
-                    newPost.date = `Posted ${new Date().toLocaleDateString("en-us", {
+                    let newPost = { ...blog };
+                    newPost.date = `Edited ${new Date().toLocaleDateString("en-us", {
                         year: "numeric",
                         month: "short",
                         day: "numeric",
                     })}`;
                     setPost(newPost);
-                    setOpenAddBlog(true);
+                    setOpenEditBlog(true);
                 }}
-                className={"nav-btn"}
+                color="success"
+                style={{ marginLeft: "0.6rem" }}
+                variant="contained"
             >
-                New Blog
-            </div>
+                Edit
+            </Button>
             <Modal
-                open={openAddBlog}
+                open={openEditBlog}
                 onClose={() => {
                     setPost({});
-                    setOpenAddBlog(false);
+                    setOpenEditBlog(false);
                 }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleEdit}>
                     <Box sx={style}>
                         <Typography
                             style={{ textAlign: "center" }}
@@ -52,7 +50,7 @@ const AddBlog = ({ user }) => {
                             variant="h4"
                             component="h2"
                         >
-                            Make A Post
+                            Edit Your Post
                         </Typography>
                         <TextField
                             style={{ marginTop: "2rem" }}
@@ -94,4 +92,4 @@ const AddBlog = ({ user }) => {
     );
 };
 
-export default AddBlog;
+export default EditBlog;

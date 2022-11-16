@@ -1,11 +1,30 @@
-.MuiPaper-root, .MuiTypography-root {
+.css-bhp9pd-MuiPaper-root-MuiCard-root, .MuiCardHeader-title  {
     background-color: rgb(11, 11, 11) !important;
     color: rgb(230, 230, 230) !important; 
-    font-size: 1.1rem !important;
-} 
+    font-size: 1.2rem !important;
+    min-width: 380px;
+}  
+
+.MuiCardHeader-subheader{
+    color:white !important;
+}
+
+.MuiCardContent-root{   
+    height: 75.5px;
+    .MuiTypography-root{  
+        color: rgb(230, 230, 230) !important; 
+        font-size: 1.1rem ; 
+        word-wrap: break-word;
+    }
+}
+
 svg {
     color:rgb(230, 230, 230); 
     &:hover{
         color: red;
     }
+} 
+
+.MuiCardActions-spacing{
+    justify-content: space-between; 
 }

@@ -41,7 +41,7 @@ const BlogContextProvider = ({ children }) => {
     const getPosts = async () => {
         try {
             const querySnapshot = await getDocs(collection(db, "posts"));
-            setBlogs(querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+            setBlogs(querySnapshot.docs.map(doc => ({ ...doc.data(), postId: doc.id })));
         } catch (err) {
             toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }
@@ -50,6 +50,11 @@ const BlogContextProvider = ({ children }) => {
         setOpenLogin(!openLogin);
         setOpenRegister(!openRegister);
     };
+    const handleChange = e => {
+        let newPost = { ...post };
+        newPost[e.target.name] = e.target.value;
+        setPost(newPost);
+    };
     return (
         <BlogContext.Provider
             value={{
@@ -57,6 +62,7 @@ const BlogContextProvider = ({ children }) => {
                 openLogin,
                 openRegister,
                 openAddBlog,
+                openEditBlog,
                 style,
                 blogs,
                 setPost,
@@ -64,7 +70,9 @@ const BlogContextProvider = ({ children }) => {
                 setOpenLogin,
                 setOpenRegister,
                 setOpenAddBlog,
+                setOpenEditBlog,
                 handleSwitch,
+                handleChange,
                 addPost,
             }}
         >

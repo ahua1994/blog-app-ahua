@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { BlogContext } from "../contexts/BlogContext";
 import { Button, TextField, Typography } from "@mui/material";
@@ -6,25 +6,36 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
 const EditBlog = ({ user, blog }) => {
-    const { style, post, setPost, openEditBlog, setOpenEditBlog, handleChange, editPost } =
+    const { style, post, setPost, openEditBlog, setOpenEditBlog, handleChange } =
         useContext(BlogContext);
+    const [edited, setEdited] = useState([]);
+    const editPost = async editId => {
+        const docRef = doc(db, "/posts/" + editId);
+        try {
+            await setDoc(docRef, post);
+            toast.success("Your Post Has Been Edited!", toastStyle);
+        } catch (err) {
+            toast.error(err.message.replace("Firebase:", ""), toastStyle);
+        }
+    };
     const handleEdit = e => {
         e.preventDefault();
-        editPost(blog.postId);
+        editPost(post.postId);
         setOpenEditBlog(false);
         setPost({});
     };
-    // console.log("editblog");
+    console.log(blog);
     return (
         <>
             <Button
                 onClick={() => {
                     let newPost = { ...blog };
-                    newPost.date = `Edited ${new Date().toLocaleDateString("en-us", {
+                    let date = new Date();
+                    newPost.date = `Edited ${date.toLocaleDateString("en-us", {
                         year: "numeric",
                         month: "short",
                         day: "numeric",
-                    })}`;
+                    })} at ${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
                     setPost(newPost);
                     setOpenEditBlog(true);
                 }}

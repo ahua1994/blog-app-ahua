@@ -1,5 +1,5 @@
 import "./BlogCard.scss";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -8,8 +8,8 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
@@ -23,7 +23,7 @@ const BlogCard = ({ blog }) => {
     return (
         <Card>
             <CardHeader
-                avatar={<Avatar sx={{ bgcolor: "#f44336" }}>{blog.author[0] || "?"}</Avatar>}
+                avatar={<Avatar sx={{ bgcolor: "#f44336" }}>{blog.author[0].toUpperCase()}</Avatar>}
                 title={blog.title}
                 subheader={`by ${blog.author}`}
             />

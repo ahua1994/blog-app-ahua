@@ -22,11 +22,12 @@ const AddBlog = ({ user }) => {
             <div
                 onClick={() => {
                     let newPost = { ...post, author: user.displayName, userId: user.uid };
-                    newPost.date = `Posted ${new Date().toLocaleDateString("en-us", {
+                    let date = new Date();
+                    newPost.date = `Posted ${date.toLocaleDateString("en-us", {
                         year: "numeric",
                         month: "short",
                         day: "numeric",
-                    })}`;
+                    })} at ${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
                     setPost(newPost);
                     setOpenAddBlog(true);
                 }}

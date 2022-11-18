@@ -41,15 +41,15 @@ const BlogContextProvider = ({ children }) => {
         }
     };
 
-    const editPost = async editId => {
-        const docRef = doc(db, "/posts/" + editId);
-        try {
-            await setDoc(docRef, post);
-            toast.success("Your Post Has Been Edited!", toastStyle);
-        } catch (err) {
-            toast.error(err.message.replace("Firebase:", ""), toastStyle);
-        }
-    };
+    // const editPost = async editId => {
+    //     const docRef = doc(db, "/posts/" + editId);
+    //     try {
+    //         await setDoc(docRef, post);
+    //         toast.success("Your Post Has Been Edited!", toastStyle);
+    //     } catch (err) {
+    //         toast.error(err.message.replace("Firebase:", ""), toastStyle);
+    //     }
+    // };
 
     const deletePost = async id => {
         try {

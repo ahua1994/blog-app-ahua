@@ -9,19 +9,13 @@ import { BlogContext } from "../contexts/BlogContext";
 const Dashboard = () => {
     const [blogs, setBlogs] = useState([]);
     const { toastStyle } = useContext(BlogContext);
-    // const getPosts = async () => {
-    //     try {
-    //         const querySnapshot = await getDocs(collection(db, "posts"));
-    //         setBlogs(querySnapshot.docs.map(doc => ({ ...doc.data(), postId: doc.id })));
-    //     } catch (err) {
-    //         toast.error(err.message.replace("Firebase:", ""), toastStyle);
-    //     }
-    // };
 
     useEffect(() => {
         onSnapshot(collection(db, "posts"), querySnapshot => {
             try {
-                setBlogs(querySnapshot.docs.map(doc => ({ ...doc.data(), postId: doc.id })));
+                let data = querySnapshot.docs.map(doc => ({ ...doc.data(), postId: doc.id }));
+                data.sort((a, b) => new Date(b.date.slice(6)) - new Date(a.date.slice(6)));
+                setBlogs(data);
             } catch (err) {
                 toast.error(err.message.replace("Firebase:", ""), toastStyle);
             }
@@ -30,8 +24,6 @@ const Dashboard = () => {
     // console.log(blogs);
     return (
         <div className="Dashboard">
-            <input type="text" placeholder="Search" />
-            <button>Search</button>
             <div className="blogs">
                 {blogs?.map(blog => (
                     <BlogCard key={blog.postId} blog={blog} />

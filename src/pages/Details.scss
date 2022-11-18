@@ -1,0 +1,62 @@
+.Details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    .post {
+        background-color: black;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 33%;
+        padding: 1rem 3rem;
+        .MuiCardHeader-title {
+            background-color: black !important;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+        .title {
+            margin: 0.5rem 0 1.5rem 0;
+        }
+        img {
+            margin-bottom: 1rem;
+            border-radius: 15px;
+        }
+        .MuiAvatar-circular {
+            display: inline-flex;
+        }
+        .date {
+            color: gray;
+        }
+        .info {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .like-btn {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+    button {
+        margin: 2rem 0 2rem 0;
+    }
+}
+@media screen and (max-width: 1600px) {
+    .Details {
+        .post {
+            padding: 1rem 2rem;
+        }
+    }
+}
+@media screen and (max-width: 900px) {
+    .Details {
+        .post {
+            padding: 0.5rem 1rem;
+        }
+    }
+}

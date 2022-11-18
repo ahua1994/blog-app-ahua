@@ -14,12 +14,12 @@ import { Button } from "@mui/material";
 import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
 import EditBlog from "./EditBlog";
-import Details from "../pages/Details";
 
 const BlogCard = ({ blog }) => {
     const { currentUser } = useContext(AuthContext);
     const { deletePost } = useContext(BlogContext);
     console.log("blogcard");
+    console.log(currentUser);
     return (
         <Card>
             <CardHeader

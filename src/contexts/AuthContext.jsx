@@ -22,7 +22,7 @@ const AuthContextProvider = ({ children }) => {
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
-    const { handleSwitch, setOpenLogin } = useContext(BlogContext);
+    const { setOpenLogin } = useContext(BlogContext);
     const toastStyle = {
         position: "top-center",
         autoClose: 3000,
@@ -34,7 +34,7 @@ const AuthContextProvider = ({ children }) => {
         e.preventDefault();
         try {
             await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
-            await updateProfile(auth.currentUser, registerUsername);
+            await updateProfile(auth.currentUser, { displayName: registerUsername });
         } catch (err) {
             return toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }
@@ -42,7 +42,6 @@ const AuthContextProvider = ({ children }) => {
         setRegisterPassword("");
         setRegisterUsername("");
         toast.success("Registered Successfully!", toastStyle);
-        handleSwitch();
     };
 
     const forgetPassword = async email => {

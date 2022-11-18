@@ -10,14 +10,15 @@ const BlogContextProvider = ({ children }) => {
     const [openRegister, setOpenRegister] = useState(false);
     const [openAddBlog, setOpenAddBlog] = useState(false);
     const [openEditBlog, setOpenEditBlog] = useState(false);
-    const [blogs, setBlogs] = useState([]);
     const [post, setPost] = useState({});
+
     const toastStyle = {
         position: "top-center",
         autoClose: 3000,
         theme: "dark",
         hideProgressBar: true,
     };
+
     const style = {
         position: "absolute",
         top: "50%",
@@ -30,6 +31,7 @@ const BlogContextProvider = ({ children }) => {
         p: 4,
         borderRadius: "15px",
     };
+
     const addPost = async () => {
         try {
             await addDoc(collection(db, "posts"), post);
@@ -38,14 +40,7 @@ const BlogContextProvider = ({ children }) => {
             toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }
     };
-    const getPosts = async () => {
-        try {
-            const querySnapshot = await getDocs(collection(db, "posts"));
-            setBlogs(querySnapshot.docs.map(doc => ({ ...doc.data(), postId: doc.id })));
-        } catch (err) {
-            toast.error(err.message.replace("Firebase:", ""), toastStyle);
-        }
-    };
+
     const editPost = async editId => {
         const docRef = doc(db, "/posts/" + editId);
         try {
@@ -55,6 +50,7 @@ const BlogContextProvider = ({ children }) => {
             toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }
     };
+
     const deletePost = async id => {
         try {
             await deleteDoc(doc(db, "posts", id));
@@ -63,15 +59,18 @@ const BlogContextProvider = ({ children }) => {
             toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }
     };
+
     const handleSwitch = () => {
         setOpenLogin(!openLogin);
         setOpenRegister(!openRegister);
     };
+
     const handleChange = e => {
         let newPost = { ...post };
         newPost[e.target.name] = e.target.value;
         setPost(newPost);
     };
+
     return (
         <BlogContext.Provider
             value={{
@@ -81,9 +80,8 @@ const BlogContextProvider = ({ children }) => {
                 openAddBlog,
                 openEditBlog,
                 style,
-                blogs,
+                toastStyle,
                 setPost,
-                getPosts,
                 editPost,
                 deletePost,
                 setOpenLogin,

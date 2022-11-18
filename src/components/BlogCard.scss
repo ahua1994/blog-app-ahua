@@ -28,3 +28,10 @@ svg {
 .MuiCardActions-spacing{
     justify-content: space-between; 
 }
+
+a{
+    text-decoration: none;
+    &:visited{
+        text-decoration: none;
+    }
+}

@@ -22,7 +22,9 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Dashboard />}></Route>
                             <Route path="/about" element={<About />}></Route>
-                            <Route path="/details" element={<Details />}></Route>
+                            <Route path="details">
+                                <Route path=":postId" element={<Details />} />
+                            </Route>
                             <Route path="/profile" element={<Profile />}></Route>
                             <Route path="*" element={<Error />}></Route>
                         </Routes>

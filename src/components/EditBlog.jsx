@@ -14,7 +14,7 @@ const EditBlog = ({ user, blog }) => {
         setOpenEditBlog(false);
         setPost({});
     };
-    console.log(blog);
+    // console.log("editblog");
     return (
         <>
             <Button

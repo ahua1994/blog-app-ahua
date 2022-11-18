@@ -8,8 +8,7 @@ import Modal from "@mui/material/Modal";
 const AddBlog = ({ user }) => {
     const { addPost, style, post, setPost, openAddBlog, setOpenAddBlog, handleChange } =
         useContext(BlogContext);
-    // console.log(user);
-    //might be reusable in EditBlog
+    console.log("addblog");
 
     const handleSubmit = e => {
         e.preventDefault();

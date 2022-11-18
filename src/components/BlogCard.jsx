@@ -1,5 +1,6 @@
 import "./BlogCard.scss";
 import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -18,6 +19,7 @@ import Details from "../pages/Details";
 const BlogCard = ({ blog }) => {
     const { currentUser } = useContext(AuthContext);
     const { deletePost } = useContext(BlogContext);
+    console.log("blogcard");
     return (
         <Card>
             <CardHeader
@@ -41,7 +43,15 @@ const BlogCard = ({ blog }) => {
             </CardContent>
             <CardActions>
                 <div className="buttons">
-                    <Details />
+                    <Link to={`/details/${blog.postId}`} state={{ blog }}>
+                        <Button
+                            color="secondary"
+                            style={{ marginLeft: "0.6rem" }}
+                            variant="contained"
+                        >
+                            More
+                        </Button>
+                    </Link>
                     {currentUser?.uid === blog.userId && (
                         <>
                             <EditBlog user={currentUser} blog={blog} />

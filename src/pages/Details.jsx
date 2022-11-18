@@ -1,11 +1,16 @@
 import React from "react";
 import { Button } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Details = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const blog = location.state;
+    console.log(blog, "details");
     return (
         <>
-            <Button color="secondary" style={{ marginLeft: "0.6rem" }} variant="contained">
-                More
+            <Button onClick={() => navigate(-1)} color="secondary" variant="contained">
+                Back
             </Button>
         </>
     );

@@ -80,6 +80,8 @@ const AddBlog = ({ user }) => {
                             name="info"
                             onChange={e => handleChange(e)}
                             value={post.info || ""}
+                            minRows="4"
+                            multiline
                         />
                         <Button
                             type="submit"

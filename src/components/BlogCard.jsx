@@ -18,8 +18,9 @@ import EditBlog from "./EditBlog";
 const BlogCard = ({ blog }) => {
     const { currentUser } = useContext(AuthContext);
     const { deletePost } = useContext(BlogContext);
-    console.log("blogcard");
-    console.log(currentUser);
+
+    // console.log(blog);
+    // console.log(currentUser);
     return (
         <Card>
             <CardHeader
@@ -34,7 +35,10 @@ const BlogCard = ({ blog }) => {
                 alt="img"
             />
             <CardContent>
-                <Typography style={{ textAlign: "right", fontSize: "0.8rem" }} variant="body2">
+                <Typography
+                    style={{ marginBottom: "0.5rem", textAlign: "right", fontSize: "0.8rem" }}
+                    variant="body2"
+                >
                     {blog.date}
                 </Typography>
                 <Typography variant="body2">

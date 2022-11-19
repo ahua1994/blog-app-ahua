@@ -1,30 +1,38 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+// import { useState } from "react";
+// import { db } from "../helpers/firebase";
+// import { toast } from "react-toastify";
+import { useContext, useState } from "react";
 import { BlogContext } from "../contexts/BlogContext";
 import { Button, TextField, Typography } from "@mui/material";
+// import { doc, setDoc } from "firebase/firestore";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
 const EditBlog = ({ user, blog }) => {
-    const { style, post, setPost, openEditBlog, setOpenEditBlog, handleChange } =
+    const { style, openEditBlog, setOpenEditBlog, editPost, edited, setEdited } =
         useContext(BlogContext);
-    const [edited, setEdited] = useState([]);
-    const editPost = async editId => {
-        const docRef = doc(db, "/posts/" + editId);
-        try {
-            await setDoc(docRef, post);
-            toast.success("Your Post Has Been Edited!", toastStyle);
-        } catch (err) {
-            toast.error(err.message.replace("Firebase:", ""), toastStyle);
-        }
+    // const [edited, setEdited] = useState({});
+
+    // const editPost = async editId => {
+    //     const docRef = doc(db, "/posts/" + editId);
+    //     try {
+    //         await setDoc(docRef, edited);
+    //         toast.success("Your Post Has Been Edited!", toastStyle);
+    //     } catch (err) {
+    //         toast.error(err.message.replace("Firebase:", ""), toastStyle);
+    //     }
+    // };
+    const handleChange = e => {
+        let newPost = { ...edited };
+        newPost[e.target.name] = e.target.value;
+        setEdited(newPost);
     };
+    console.log(edited);
     const handleEdit = e => {
         e.preventDefault();
-        editPost(post.postId);
+        editPost(edited);
         setOpenEditBlog(false);
-        setPost({});
     };
-    console.log(blog);
     return (
         <>
             <Button
@@ -36,7 +44,7 @@ const EditBlog = ({ user, blog }) => {
                         month: "short",
                         day: "numeric",
                     })} at ${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
-                    setPost(newPost);
+                    setEdited(newPost);
                     setOpenEditBlog(true);
                 }}
                 color="success"
@@ -48,7 +56,7 @@ const EditBlog = ({ user, blog }) => {
             <Modal
                 open={openEditBlog}
                 onClose={() => {
-                    setPost({});
+                    setEdited({});
                     setOpenEditBlog(false);
                 }}
                 aria-labelledby="modal-modal-title"
@@ -71,7 +79,7 @@ const EditBlog = ({ user, blog }) => {
                             required
                             name="title"
                             onChange={e => handleChange(e)}
-                            value={post.title || ""}
+                            value={edited.title || ""}
                         />
                         <TextField
                             style={{ marginTop: "2rem" }}
@@ -79,16 +87,18 @@ const EditBlog = ({ user, blog }) => {
                             variant="outlined"
                             name="image"
                             onChange={e => handleChange(e)}
-                            value={post.image || ""}
+                            value={edited.image || ""}
                         />
                         <TextField
                             style={{ marginTop: "2rem" }}
-                            label="Info"
+                            label="Entry"
                             variant="outlined"
                             required
                             name="info"
                             onChange={e => handleChange(e)}
-                            value={post.info || ""}
+                            value={edited.info || ""}
+                            minRows="4"
+                            multiline
                         />
                         <Button
                             type="submit"

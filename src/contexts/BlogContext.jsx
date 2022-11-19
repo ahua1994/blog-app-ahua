@@ -1,7 +1,7 @@
 import { db } from "../helpers/firebase";
 import { toast } from "react-toastify";
 import { createContext, useState } from "react";
-import { addDoc, collection, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { addDoc, setDoc, collection, doc, deleteDoc, onSnapshot } from "firebase/firestore";
 
 export const BlogContext = createContext();
 
@@ -10,6 +10,8 @@ const BlogContextProvider = ({ children }) => {
     const [openRegister, setOpenRegister] = useState(false);
     const [openAddBlog, setOpenAddBlog] = useState(false);
     const [openEditBlog, setOpenEditBlog] = useState(false);
+    const [blogs, setBlogs] = useState([]);
+    const [edited, setEdited] = useState({});
     const [post, setPost] = useState({});
 
     const toastStyle = {
@@ -32,6 +34,18 @@ const BlogContextProvider = ({ children }) => {
         borderRadius: "15px",
     };
 
+    const getPosts = () => {
+        onSnapshot(collection(db, "posts"), querySnapshot => {
+            try {
+                let data = querySnapshot.docs.map(doc => ({ ...doc.data(), postId: doc.id }));
+                // data.sort((a, b) => new Date(b.date.slice(6)) - new Date(a.date.slice(6)));
+                setBlogs(data);
+            } catch (err) {
+                toast.error(err.message.replace("Firebase:", ""), toastStyle);
+            }
+        });
+    };
+
     const addPost = async () => {
         try {
             await addDoc(collection(db, "posts"), post);
@@ -41,15 +55,15 @@ const BlogContextProvider = ({ children }) => {
         }
     };
 
-    // const editPost = async editId => {
-    //     const docRef = doc(db, "/posts/" + editId);
-    //     try {
-    //         await setDoc(docRef, post);
-    //         toast.success("Your Post Has Been Edited!", toastStyle);
-    //     } catch (err) {
-    //         toast.error(err.message.replace("Firebase:", ""), toastStyle);
-    //     }
-    // };
+    const editPost = async obj => {
+        const docRef = doc(db, "/posts/" + obj.postId);
+        try {
+            await setDoc(docRef, obj);
+            toast.success("Your Post Has Been Edited!", toastStyle);
+        } catch (err) {
+            toast.error(err.message.replace("Firebase:", ""), toastStyle);
+        }
+    };
 
     const deletePost = async id => {
         try {
@@ -75,6 +89,8 @@ const BlogContextProvider = ({ children }) => {
         <BlogContext.Provider
             value={{
                 post,
+                blogs,
+                edited,
                 openLogin,
                 openRegister,
                 openAddBlog,
@@ -82,7 +98,9 @@ const BlogContextProvider = ({ children }) => {
                 style,
                 toastStyle,
                 setPost,
+                getPosts,
                 editPost,
+                setEdited,
                 deletePost,
                 setOpenLogin,
                 setOpenRegister,

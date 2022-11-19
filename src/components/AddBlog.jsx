@@ -1,18 +1,23 @@
-import { useContext } from "react";
-import { db } from "../helpers/firebase";
+import { useContext, useState } from "react";
 import { BlogContext } from "../contexts/BlogContext";
 import { Button, TextField, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
 const AddBlog = ({ user }) => {
-    const { addPost, style, post, setPost, openAddBlog, setOpenAddBlog, handleChange } =
-        useContext(BlogContext);
-    console.log("addblog");
+    const { addPost, style, openAddBlog, setOpenAddBlog } = useContext(BlogContext);
+    const [post, setPost] = useState({});
+    console.log(post);
+
+    const handleChange = e => {
+        let newPost = { ...post };
+        newPost[e.target.name] = e.target.value;
+        setPost(newPost);
+    };
 
     const handleSubmit = e => {
         e.preventDefault();
-        addPost();
+        addPost(post);
         setOpenAddBlog(false);
         setPost({});
     };
@@ -22,12 +27,6 @@ const AddBlog = ({ user }) => {
             <div
                 onClick={() => {
                     let newPost = { ...post, author: user.displayName, userId: user.uid };
-                    let date = new Date();
-                    newPost.date = `Posted ${date.toLocaleDateString("en-us", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                    })} at ${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
                     setPost(newPost);
                     setOpenAddBlog(true);
                 }}

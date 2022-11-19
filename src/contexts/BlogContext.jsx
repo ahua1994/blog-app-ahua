@@ -1,7 +1,7 @@
 import { db } from "../helpers/firebase";
 import { toast } from "react-toastify";
 import { createContext, useState } from "react";
-import { addDoc, setDoc, collection, doc, deleteDoc, onSnapshot } from "firebase/firestore";
+import { addDoc, setDoc, collection, doc, deleteDoc, onSnapshot, getDoc } from "firebase/firestore";
 
 export const BlogContext = createContext();
 
@@ -10,9 +10,9 @@ const BlogContextProvider = ({ children }) => {
     const [openRegister, setOpenRegister] = useState(false);
     const [openAddBlog, setOpenAddBlog] = useState(false);
     const [openEditBlog, setOpenEditBlog] = useState(false);
+
     const [blogs, setBlogs] = useState([]);
-    const [edited, setEdited] = useState({});
-    const [post, setPost] = useState({});
+    // const [post, setPost] = useState({});
 
     const toastStyle = {
         position: "top-center",
@@ -34,6 +34,10 @@ const BlogContextProvider = ({ children }) => {
         borderRadius: "15px",
     };
 
+    // const get1Post = async postId => {
+    //     return await getDoc(doc(db, "posts", postId)).then(doc => doc.data());
+    // };
+
     const getPosts = () => {
         onSnapshot(collection(db, "posts"), querySnapshot => {
             try {
@@ -46,9 +50,15 @@ const BlogContextProvider = ({ children }) => {
         });
     };
 
-    const addPost = async () => {
+    const addPost = async obj => {
         try {
-            await addDoc(collection(db, "posts"), post);
+            let date = new Date();
+            let postDate = `Posted ${date.toLocaleDateString("en-us", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+            })} at ${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
+            await addDoc(collection(db, "posts"), { ...obj, date: postDate });
             toast.success("Thank You For Posting!", toastStyle);
         } catch (err) {
             toast.error(err.message.replace("Firebase:", ""), toastStyle);
@@ -58,7 +68,13 @@ const BlogContextProvider = ({ children }) => {
     const editPost = async obj => {
         const docRef = doc(db, "/posts/" + obj.postId);
         try {
-            await setDoc(docRef, obj);
+            let date = new Date();
+            let editDate = `Edited ${date.toLocaleDateString("en-us", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+            })} at ${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
+            await setDoc(docRef, { ...obj, date: editDate });
             toast.success("Your Post Has Been Edited!", toastStyle);
         } catch (err) {
             toast.error(err.message.replace("Firebase:", ""), toastStyle);
@@ -79,35 +95,28 @@ const BlogContextProvider = ({ children }) => {
         setOpenRegister(!openRegister);
     };
 
-    const handleChange = e => {
-        let newPost = { ...post };
-        newPost[e.target.name] = e.target.value;
-        setPost(newPost);
-    };
-
     return (
         <BlogContext.Provider
             value={{
-                post,
+                // post,
                 blogs,
-                edited,
                 openLogin,
                 openRegister,
                 openAddBlog,
                 openEditBlog,
                 style,
                 toastStyle,
-                setPost,
+                // setPost,
                 getPosts,
                 editPost,
-                setEdited,
+                // get1Post,
                 deletePost,
                 setOpenLogin,
                 setOpenRegister,
                 setOpenAddBlog,
                 setOpenEditBlog,
                 handleSwitch,
-                handleChange,
+                // handleChange,
                 addPost,
             }}
         >

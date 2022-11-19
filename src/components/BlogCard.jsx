@@ -32,7 +32,7 @@ const BlogCard = ({ blog }) => {
                 component="img"
                 height="194"
                 image={blog.image || `https://picsum.photos/300`}
-                alt="img"
+                alt="invalid img-url"
             />
             <CardContent>
                 <Typography
@@ -58,7 +58,7 @@ const BlogCard = ({ blog }) => {
                     </Link>
                     {currentUser?.uid === blog.userId && (
                         <>
-                            <EditBlog user={currentUser} blog={blog} />
+                            <EditBlog blog={blog} />
                             <Button
                                 color="error"
                                 style={{ marginLeft: "0.6rem" }}

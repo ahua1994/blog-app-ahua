@@ -22,7 +22,7 @@ const Details = () => {
                 />
                 <hr style={{ width: "100%" }}></hr>
                 <h2 className="title">{blog.title} </h2>
-                <img src={blog.image || "https://picsum.photos/1000"} alt={"img"} />
+                <img src={blog.image || "https://picsum.photos/1000"} alt={"invalid img-url"} />
                 <hr style={{ width: "100%" }}></hr>
                 <p className="date">{blog.date}</p>
                 <p className="info">{blog.info}</p>

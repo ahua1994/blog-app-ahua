@@ -72,7 +72,7 @@ const BlogCard = ({ blog }) => {
                         </>
                     )}
                 </div>
-                <IconButton onClick={() => setLikes(blog, currentUser?.uid)}>
+                <IconButton className="card-likes" onClick={() => setLikes(blog, currentUser?.uid)}>
                     {blog?.likes?.length !== 0 && <p className="likes">{blog?.likes?.length}</p>}
                     <FavoriteIcon
                         style={{ color: blog?.likes?.includes(currentUser?.uid) ? "red" : null }}

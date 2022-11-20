@@ -7,6 +7,9 @@
 .blogcard{
     background-color: rgb(11, 11, 11) !important;
 } 
+.buttons {
+    margin-top: 1rem;
+}
 
 .MuiCardHeader-subheader{
     color:white !important;
@@ -15,7 +18,7 @@
 p.likes{
     margin:0;
     color:rgb(214, 214, 214);
-    font-size: 1.2rem;
+    font-size: 1.2rem; 
 }
 
 .MuiCardContent-root{   
@@ -25,6 +28,11 @@ p.likes{
         font-size: 1.1rem ; 
         word-wrap: break-word;
     }
+}
+
+button.card-likes{
+    padding: 0; 
+    align-self: flex-end;
 }
 
 svg {

@@ -1,5 +1,5 @@
 import "./BlogCard.scss";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -17,7 +17,11 @@ import EditBlog from "./EditBlog";
 
 const BlogCard = ({ blog }) => {
     const { currentUser } = useContext(AuthContext);
-    const { deletePost } = useContext(BlogContext);
+    const { deletePost, setLikes } = useContext(BlogContext);
+
+    useEffect(() => {
+        setLikes();
+    }, []);
 
     return (
         <Card>

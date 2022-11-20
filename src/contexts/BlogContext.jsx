@@ -33,9 +33,10 @@ const BlogContextProvider = ({ children }) => {
         borderRadius: "15px",
     };
 
-    // const get1Post = async postId => {
-    //     return await getDoc(doc(db, "posts", postId)).then(doc => doc.data());
-    // };
+    const setLikes = async postId => {
+        let data = await getDoc(doc(db, "posts", postId)).then(doc => doc.data());
+        console.log(data);
+    };
 
     const getPosts = () => {
         onSnapshot(collection(db, "posts"), querySnapshot => {
@@ -101,7 +102,6 @@ const BlogContextProvider = ({ children }) => {
     return (
         <BlogContext.Provider
             value={{
-                // post,
                 blogs,
                 openLogin,
                 openRegister,
@@ -109,17 +109,15 @@ const BlogContextProvider = ({ children }) => {
                 openEditBlog,
                 style,
                 toastStyle,
-                // setPost,
                 getPosts,
                 editPost,
-                // get1Post,
+                setLikes,
                 deletePost,
                 setOpenLogin,
                 setOpenRegister,
                 setOpenAddBlog,
                 setOpenEditBlog,
                 handleSwitch,
-                // handleChange,
                 addPost,
             }}
         >

@@ -79,6 +79,7 @@ const AddBlog = ({ user }) => {
                             onChange={e => handleChange(e)}
                             value={post.info || ""}
                             minRows="4"
+                            maxRows="10"
                             multiline
                         />
                         <Button

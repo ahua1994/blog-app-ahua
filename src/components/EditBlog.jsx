@@ -84,6 +84,7 @@ const EditBlog = ({ blog }) => {
                                 onChange={e => handleChange(e)}
                                 value={edited.info}
                                 minRows="4"
+                                maxRows="10"
                                 multiline
                             />
                             <Button

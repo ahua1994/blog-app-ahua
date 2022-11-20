@@ -7,7 +7,6 @@ import Modal from "@mui/material/Modal";
 const AddBlog = ({ user }) => {
     const { addPost, style, openAddBlog, setOpenAddBlog } = useContext(BlogContext);
     const [post, setPost] = useState({});
-    console.log(post);
 
     const handleChange = e => {
         let newPost = { ...post };

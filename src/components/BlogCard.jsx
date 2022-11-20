@@ -19,8 +19,6 @@ const BlogCard = ({ blog }) => {
     const { currentUser } = useContext(AuthContext);
     const { deletePost } = useContext(BlogContext);
 
-    // console.log(blog);
-    // console.log(currentUser);
     return (
         <Card>
             <CardHeader

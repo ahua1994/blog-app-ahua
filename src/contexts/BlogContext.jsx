@@ -12,7 +12,6 @@ const BlogContextProvider = ({ children }) => {
     const [openEditBlog, setOpenEditBlog] = useState(false);
 
     const [blogs, setBlogs] = useState([]);
-    // const [post, setPost] = useState({});
 
     const toastStyle = {
         position: "top-center",
@@ -42,7 +41,11 @@ const BlogContextProvider = ({ children }) => {
         onSnapshot(collection(db, "posts"), querySnapshot => {
             try {
                 let data = querySnapshot.docs.map(doc => ({ ...doc.data(), postId: doc.id }));
-                // data.sort((a, b) => new Date(b.date.slice(6)) - new Date(a.date.slice(6)));
+                data.sort((a, b) => {
+                    let date1 = a.date.split(" ").slice(1, 4).join(" ");
+                    let date2 = b.date.split(" ").slice(1, 4).join(" ");
+                    return new Date(date2) - new Date(date1);
+                });
                 setBlogs(data);
             } catch (err) {
                 toast.error(err.message.replace("Firebase:", ""), toastStyle);

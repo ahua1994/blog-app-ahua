@@ -9,7 +9,7 @@ const Details = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { blog } = location.state;
-    console.log("details");
+
     return (
         <div className="Details">
             <div className="post">

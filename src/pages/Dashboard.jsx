@@ -1,5 +1,5 @@
 import "./Dashboard.scss";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import BlogCard from "../components/BlogCard";
 import { BlogContext } from "../contexts/BlogContext";
 
@@ -9,7 +9,7 @@ const Dashboard = () => {
     useEffect(() => {
         getPosts();
     }, []);
-    console.log("dahsboard");
+
     return (
         <div className="Dashboard">
             <div className="blogs">

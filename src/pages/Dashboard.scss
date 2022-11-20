@@ -10,3 +10,26 @@
         gap: 3rem;
     }
 }
+
+@media screen and (max-width: 1600px) {
+    .Dashboard{
+        .blogs{
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+@media screen and (max-width: 1030px) {
+    .Dashboard{
+        .blogs{
+            grid-template-columns: 1fr;
+        }
+    }
+}
+@media screen and (max-width: 720px) {
+    .Dashboard{
+        .blogs{
+            grid-template-columns: 1fr;
+            width: 95%;
+        }
+    }
+}

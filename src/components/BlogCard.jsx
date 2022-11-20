@@ -24,7 +24,7 @@ const BlogCard = ({ blog }) => {
     }, []);
 
     return (
-        <Card>
+        <Card className="blogcard" sx={{ width: "380px" }}>
             <CardHeader
                 avatar={<Avatar sx={{ bgcolor: "#f44336" }}>{blog.author[0].toUpperCase()}</Avatar>}
                 title={blog.title}

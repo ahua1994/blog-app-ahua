@@ -33,11 +33,6 @@ const BlogContextProvider = ({ children }) => {
         borderRadius: "15px",
     };
 
-    const setLikes = async postId => {
-        let data = await getDoc(doc(db, "posts", postId)).then(doc => doc.data());
-        console.log(data);
-    };
-
     const getPosts = () => {
         onSnapshot(collection(db, "posts"), querySnapshot => {
             try {
@@ -64,6 +59,26 @@ const BlogContextProvider = ({ children }) => {
             })} at ${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
             await addDoc(collection(db, "posts"), { ...obj, date: postDate });
             toast.success("Thank You For Posting!", toastStyle);
+        } catch (err) {
+            toast.error(err.message.replace("Firebase:", ""), toastStyle);
+        }
+    };
+
+    const setLikes = async (obj, uid) => {
+        if (!uid) return toast("🦄 Please Login to Leave Likes!", toastStyle);
+        const docRef = doc(db, "/posts/" + obj.postId);
+        if (!obj.likes) {
+            obj.likes = [uid];
+        } else {
+            if (obj.likes.includes(uid)) {
+                toast("🦄 Removed Like", toastStyle);
+                obj.likes.splice(obj.likes.indexOf(uid), 1);
+            } else {
+                obj.likes.push(uid);
+            }
+        }
+        try {
+            await setDoc(docRef, obj);
         } catch (err) {
             toast.error(err.message.replace("Firebase:", ""), toastStyle);
         }

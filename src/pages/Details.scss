@@ -11,6 +11,7 @@
         justify-content: center;
         width: 33%;
         padding: 1rem 3rem;
+        margin-bottom: 2rem;
         .MuiCardHeader-title {
             background-color: black !important;
         }
@@ -20,6 +21,7 @@
         }
         .title {
             margin: 0.5rem 0 1.5rem 0;
+            word-wrap: break-word;
         }
         img {
             margin-bottom: 1rem;
@@ -29,22 +31,26 @@
             display: inline-flex;
         }
         .date {
-            color: gray; 
+            color: gray;
         }
         .info {
             margin: 0;
             font-size: 1.1rem;
         }
-        .like-btn {
-            margin: 0;
+        .btn {
+            margin: 1rem 0 0 0;
             padding: 0;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            .right {
+                display: flex;
+                align-self: flex-end; 
+                p{
+                    align-self: flex-end; 
+                }
+            }
         }
-    }
-    button {
-        margin: 2rem 0 2rem 0;
-    }
+    } 
 }
 @media screen and (max-width: 1600px) {
     .Details {

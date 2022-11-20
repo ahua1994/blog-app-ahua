@@ -1,4 +1,15 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
 .About {
     text-align: center;
     font-size: 1.6rem;
+    background-color: black; 
+    margin-top: 5rem;
+    padding: 1rem 2rem 3rem 2rem;
+    width: 50%; 
+    outline: 8px ridge rgba(170, 50, 220, .6);
+    border-radius: 2rem;
+    word-wrap: break-word;
 }

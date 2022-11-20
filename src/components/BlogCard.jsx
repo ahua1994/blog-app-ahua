@@ -1,5 +1,5 @@
 import "./BlogCard.scss";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -19,15 +19,11 @@ const BlogCard = ({ blog }) => {
     const { currentUser } = useContext(AuthContext);
     const { deletePost, setLikes } = useContext(BlogContext);
 
-    useEffect(() => {
-        setLikes();
-    }, []);
-
     return (
         <Card className="blogcard" sx={{ width: "380px" }}>
             <CardHeader
                 avatar={<Avatar sx={{ bgcolor: "#f44336" }}>{blog.author[0].toUpperCase()}</Avatar>}
-                title={blog.title}
+                title={blog.title.length > 20 ? blog.title.slice(0, 20) + "..." : blog.title}
                 subheader={`by ${blog.author}`}
             />
             <CardMedia
@@ -76,8 +72,11 @@ const BlogCard = ({ blog }) => {
                         </>
                     )}
                 </div>
-                <IconButton>
-                    <FavoriteIcon />
+                <IconButton onClick={() => setLikes(blog, currentUser?.uid)}>
+                    {blog?.likes?.length !== 0 && <p className="likes">{blog?.likes?.length}</p>}
+                    <FavoriteIcon
+                        style={{ color: blog?.likes?.includes(currentUser?.uid) ? "red" : null }}
+                    />
                 </IconButton>
             </CardActions>
         </Card>

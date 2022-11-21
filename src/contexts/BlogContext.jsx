@@ -1,7 +1,7 @@
 import { db } from "../helpers/firebase";
 import { toast } from "react-toastify";
 import { createContext, useState } from "react";
-import { addDoc, setDoc, collection, doc, deleteDoc, onSnapshot, getDoc } from "firebase/firestore";
+import { addDoc, setDoc, collection, doc, deleteDoc, onSnapshot } from "firebase/firestore";
 
 export const BlogContext = createContext();
 

@@ -1,11 +1,11 @@
 .css-bhp9pd-MuiPaper-root-MuiCard-root, .MuiCardHeader-title  {
     background-color: rgb(11, 11, 11) !important;
     color: rgb(230, 230, 230) !important; 
-    font-size: 1.2rem !important;
-    min-width: 380px;
+    font-size: 1.2rem !important; 
 }  
 .blogcard{
     background-color: rgb(11, 11, 11) !important;
+    width: 380px;
 } 
 .buttons {
     margin-top: 1rem;
@@ -50,5 +50,11 @@ a{
     text-decoration: none;
     &:visited{
         text-decoration: none;
+    }
+} 
+
+@media screen and (max-width: 389px) {
+    .blogcard{
+        width: 350px;
     }
 }

@@ -1,0 +1,49 @@
+.pfcontainer { 
+    display: flex; 
+    justify-content: center; 
+    margin-top: 3rem;
+    .Profile{
+        width: 65%; 
+        .lpgrid, .mpgrid{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            margin-bottom: 5rem;
+            gap: 3rem;
+        }
+        .mpgrid{ 
+            margin-top: 5rem; 
+        }
+        hr{
+            margin-bottom: 3rem;
+        }
+    }
+}
+@media screen and (max-width: 1560px) {
+    .pfcontainer{
+        .Profile{ 
+            .mpgrid,.lpgrid{
+                grid-template-columns: 1fr 1fr; 
+            }
+        }
+    }
+}
+@media screen and (max-width: 1050px) {
+    .pfcontainer{
+        .Profile{ 
+            width: 95%;
+            .mpgrid,.lpgrid{
+                grid-template-columns: 1fr; 
+            }
+        }
+    }
+}
+@media screen and (max-width: 499) {
+    .pfcontainer{
+        .Profile{ 
+            width: 100%;
+            .mpgrid,.lpgrid{
+                grid-template-columns: 1fr; 
+            }
+        }
+    }
+}

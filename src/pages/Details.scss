@@ -14,6 +14,7 @@
         margin-bottom: 2rem;
         .MuiCardHeader-title {
             background-color: black !important;
+            display: inline;
         }
         .header {
             display: flex;
@@ -56,6 +57,15 @@
     .Details {
         .post {
             padding: 1rem 2rem;
+            width: 44%;
+        }
+    }
+}
+@media screen and (max-width: 1300px) {
+    .Details {
+        .post {
+            padding: 0.5rem 1rem;
+            width: 55%;
         }
     }
 }
@@ -63,6 +73,15 @@
     .Details {
         .post {
             padding: 0.5rem 1rem;
+            width: 73%;
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    .Details {
+        .post {
+            padding: 0.5rem 1rem;
+            width: 88%;
         }
     }
 }

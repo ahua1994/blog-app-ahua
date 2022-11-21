@@ -1,7 +1,16 @@
-import React from "react";
+import "./Profile.scss";
+import BlogCard from "../components/BlogCard";
+import { useContext, useEffect } from "react";
+import { BlogContext } from "../contexts/BlogContext";
 
 const Profile = () => {
-    return <div>Profile</div>;
+    const { getPosts, blogs } = useContext(BlogContext);
+
+    useEffect(() => {
+        getPosts();
+    }, []);
+
+    return <div className="MyPosts"> </div>;
 };
 
 export default Profile;

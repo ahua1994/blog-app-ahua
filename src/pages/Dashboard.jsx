@@ -9,7 +9,6 @@ const Dashboard = () => {
     useEffect(() => {
         getPosts();
     }, []);
-    console.log(blogs);
 
     return (
         <div className="Dashboard">

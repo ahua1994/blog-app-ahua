@@ -26,8 +26,8 @@ const CustomNavbar = () => {
                 </div>
                 {currentUser ? (
                     <>
-                        <AddBlog user={currentUser}/>
-                        <div className="nav-btn">
+                        <AddBlog user={currentUser} />
+                        <div onClick={() => navigate("/profile")} className="nav-btn">
                             {currentUser.displayName} <FontAwesomeIcon icon={faUserCircle} />
                         </div>
                         <div className="nav-btn" onClick={logout}>

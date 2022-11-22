@@ -41,7 +41,7 @@ const Profile = () => {
                     </div>
                 </div>
             ) : (
-                <h1>Please Login to View Your Profile !</h1>
+                <h1 className="plea">Please Login to View Your Profile !</h1>
             )}
         </div>
     );

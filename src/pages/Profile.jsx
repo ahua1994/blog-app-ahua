@@ -11,7 +11,6 @@ const Profile = () => {
     useEffect(() => {
         getPosts();
     }, []);
-    console.log(blogs);
 
     return (
         <div className="pfcontainer">
@@ -33,9 +32,9 @@ const Profile = () => {
                         <hr />
                         <div className="lpgrid">
                             {blogs
-                                .filter(blog => blog.likes.includes(currentUser.uid))
+                                ?.filter(blog => blog?.likes?.includes(currentUser.uid))
                                 .map(blog => (
-                                    <BlogCard key={blog.postId} blog={blog} />
+                                    <BlogCard key={blog?.postId} blog={blog} />
                                 ))}
                         </div>
                     </div>

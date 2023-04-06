@@ -11,7 +11,6 @@ import { AuthContext } from "../contexts/AuthContext";
 const Details = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location);
     const blog = location?.state?.blog || null;
     const { currentUser } = useContext(AuthContext);
     const { setLikes } = useContext(BlogContext);

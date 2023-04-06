@@ -2,4 +2,4 @@ Utilizes Firebase Authentication, Cloud Firestore on the back-end, MUI, react-to
 
 Link: <a href="https://fireblog-ahua.web.app/">React Blog App</a>
 
-![ReactBlogGif]("https://github.com/ahua1994/blog-app-ahua/blob/master/src/helpers/React-Blog-App.gif")
+![ReactBlogGif](https://github.com/ahua1994/blog-app-ahua/blob/master/src/helpers/React-Blog-App.gif)

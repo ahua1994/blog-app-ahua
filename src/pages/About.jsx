@@ -9,8 +9,8 @@ const About = () => {
             <div className="About">
                 <h1>Hello My Name Is Andy Hua!</h1>
                 <p className="intro">
-                    I am currently a student at Clarusway, and I am studying React.<br></br> This is
-                    a blog app created using what we've learned so far!
+                    I am an IT school Graduate, honing my skills in React.<br></br> This is a blog
+                    app created using what I've learned on my development journey!
                 </p>
                 <div className="info">
                     <div>

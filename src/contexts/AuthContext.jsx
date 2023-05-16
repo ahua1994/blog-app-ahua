@@ -23,6 +23,7 @@ const AuthContextProvider = ({ children }) => {
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const { setOpenLogin } = useContext(BlogContext);
+    
     const toastStyle = {
         position: "top-center",
         autoClose: 3000,
